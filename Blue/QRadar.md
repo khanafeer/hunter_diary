@@ -2,7 +2,7 @@
 
 # Troubleshooting
 
-### Wincollect Agent
+## Wincollect Agent
 
 - Check Wincollect agent logs.
 
@@ -20,6 +20,29 @@ C:\Program Files\IBM\WinCollect\logs\*
 4.Remove the **ConfigurationServer.PEM** file from the config folder in the agent which is in C:\Program Files\IBM\WinCollect\config. (At the Windows machine that hosts the agent)
 5. start the Wincollect service. (At the Windows machine that hosts the agent)
 ```
+
+## Applications
+
+```
+```
+
+
+
+## restart QRadar applications
+
+1. Log in to QRadar.
+2. From the **☰** menu, click **Interactive API for developers**. The interactive API is displayed. QRadar ships with several API versions, with the latest version being indicated by the highest version number. QRadar Support always recommends using the most recent API vesion (highest number).
+3. Select the **/gui_app_framework** endpoint.
+4. Click **/applications**:
+5. Scroll to bottom, click the **Try It Out** button. The GET command returns the **application_id** for the application. Optionally, you can use the command line and */opt/qradar/support/qapp_utils730.py* to retrieve the application ID.
+6. Click the **POST** tab.
+7. In the **application_id** field, type the application id number.
+8. To stop or start your application, type one of the following options:
+   1. **STOPPED** - this value stops the application after you click the **Try it Out** button.
+   2. **RUNNING** - this value starts the application after you click the **Try it Out** button.
+9. Verify the response field returned for the command displays **200 (OK)**. The response code returned allows you to verify that the command was successfully sent to the QRadar API. This status can be confirmed using the */opt/qradar/support/qapp_utils730.py* utility.
+
+
 
 
 
@@ -91,7 +114,7 @@ SELECT logsourceid, LOGSOURCENAME(logsourceid) AS 'Name of log source', LOGSOURC
 - Check EPS for each log source ex: Windows Event Logs
 
   ```sql
-  SELECT LOGSOURCETYPENAME(devicetype) AS "Log Source", SUM(eventcount) AS "Number of Events in Interval", SUM(eventcount) / (60*60*2) AS "EPS in Interval", UniqueCount(sourceip) AS 'Count of SourceIps',UniqueCount(LOGSOURCENAME(logsourceid)) AS 'Count of sender stations'  FROM events GROUP BY "Log Source" ORDER BY "EPS in Interval" DESC LAST 2 Hours
+  SELECT LOGSOURCETYPENAME(devicetype) AS "Log Source", SUM(eventcount) AS "Number of Events in Interval", SUM(eventcount) / (60*60*2) AS "EPS in Interval", UniqueCount(sourceip) AS 'Count of SourceIps',UniqueCount(LOGSOURCENAME(logsourceid)) AS 'Count of sender stations'  FROM events GROUP BY "Log Source" ORDER BY "EPS in Interval" DESC START '2022-01-25 1:30' STOP '2022-01-25 3:30'
   
   ```
 
