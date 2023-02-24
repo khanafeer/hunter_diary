@@ -12,12 +12,12 @@ git checkout -b feature_name
 ```
 
 ```
+$ git checkout master
 $ git checkout -b hotfix
 do the fix in the hotfix, and test.
 $ git checkout master
 $ git merge hotfix
 $ git branch -d hotfix
-
 ```
 
 
