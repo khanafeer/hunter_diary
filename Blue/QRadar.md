@@ -103,6 +103,9 @@ SELECT logsourceid, LOGSOURCENAME(logsourceid) AS 'Name of log source', LOGSOURC
 
 ```
 "UserId":"(.*?)"
+Question Name=(?:[a-zA-Z]*\.)+([a-zA-Z]*\.[a-zA-Z]+)(?:\/.*)?
+Question Name=(?:[a-zA-Z]*\.)+([a-zA-Z]+)(?:\/.*)?
+
 ```
 
 - **export rules**
